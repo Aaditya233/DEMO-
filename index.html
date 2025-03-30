@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For Someone Special ❤</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 100%);
+            height: 100vh;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: #333;
+            overflow: hidden;
+        }
+        
+        .container {
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            max-width: 500px;
+            width: 90%;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        h1 {
+            color: #ff6b6b;
+            margin-bottom: 30px;
+        }
+        
+        .buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 30px;
+        }
+        
+        .btn {
+            padding: 12px 30px;
+            border: none;
+            border-radius: 50px;
+            font-size: 18px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: bold;
+        }
+        
+        #yesBtn {
+            background-color: #4CAF50;
+            color: white;
+            box-shadow: 0 4px 15px rgba(76, 175, 80, 0.4);
+        }
+        
+        #yesBtn:hover {
+            background-color: #3e8e41;
+            transform: scale(1.05);
+        }
+        
+        #noBtn {
+            background-color: #f44336;
+            color: white;
+            position: absolute;
+            box-shadow: 0 4px 15px rgba(244, 67, 54, 0.4);
+            transition: all 0.1s;
+        }
+        
+        .hidden {
+            display: none;
+        }
+        
+        #congrats {
+            animation: fadeIn 1.5s;
+        }
+        
+        #congrats img {
+            max-width: 100%;
+            border-radius: 10px;
+            margin-top: 20px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .heart {
+            position: absolute;
+            font-size: 20px;
+            color: #ff6b6b;
+            animation: float 4s ease-in-out infinite;
+            z-index: -1;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(10deg); }
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div id="question">
+            <h1>Will you be my girlfriend? ❤</h1>
+            <p>I promise to make you smile every day...</p>
+            
+            <div class="buttons">
+                <button id="yesBtn" class="btn">YES</button>
+                <button id="noBtn" class="btn">NO</button>
+            </div>
+        </div>
+        
+        <div id="congrats" class="hidden">
+            <h1>Congratulations! 🎉</h1>
+            <p>You just made me the happiest person in the world!</p>
+            <img id="customImage" src="https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Romantic couple">
+            <p>I can't wait to start this beautiful journey with you!</p>
+        </div>
+    </div>
+
+    <script>
+        const noBtn = document.getElementById('noBtn');
+        const yesBtn = document.getElementById('yesBtn');
+        const questionDiv = document.getElementById('question');
+        const congratsDiv = document.getElementById('congrats');
+        const customImage = document.getElementById('customImage');
+        
+        // Replace with your image URL
+        // customImage.src = "YOUR_IMAGE_URL_HERE";
+        
+        // Create floating hearts
+        function createHearts() {
+            for (let i = 0; i < 15; i++) {
+                const heart = document.createElement('div');
+                heart.className = 'heart';
+                heart.innerHTML = '❤';
+                heart.style.left = Math.random() * 100 + 'vw';
+                heart.style.top = Math.random() * 100 + 'vh';
+                heart.style.animationDuration = 3 + Math.random() * 5 + 's';
+                heart.style.animationDelay = Math.random() * 3 + 's';
+                document.body.appendChild(heart);
+            }
+        }
+        
+        createHearts();
+        
+        noBtn.addEventListener('mouseover', function() {
+            // Move the NO button randomly when hovered
+            const x = Math.random() * (window.innerWidth - 100);
+            const y = Math.random() * (window.innerHeight - 50);
+            
+            noBtn.style.position = 'absolute';
+            noBtn.style.left = x + 'px';
+            noBtn.style.top = y + 'px';
+        });
+        
+        noBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            // Move it again if somehow clicked
+            const x = Math.random() * (window.innerWidth - 100);
+            const y = Math.random() * (window.innerHeight - 50);
+            
+            noBtn.style.left = x + 'px';
+            noBtn.style.top = y + 'px';
+        });
+        
+        yesBtn.addEventListener('click', function() {
+            questionDiv.classList.add('hidden');
+            congratsDiv.classList.remove('hidden');
+            
+            // Create more hearts when she says yes
+            for (let i = 0; i < 30; i++) {
+                setTimeout(() => {
+                    const heart = document.createElement('div');
+                    heart.className = 'heart';
+                    heart.innerHTML = '❤';
+                    heart.style.left = Math.random() * 100 + 'vw';
+                    heart.style.top = Math.random() * 100 + 'vh';
+                    heart.style.animationDuration = 3 + Math.random() * 5 + 's';
+                    document.body.appendChild(heart);
+                    
+                    // Remove hearts after animation
+                    setTimeout(() => {
+                        heart.remove();
+                    }, 8000);
+                }, i * 200);
+            }
+        });
+    </script>
+</body>
+</html>
